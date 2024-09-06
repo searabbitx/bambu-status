@@ -1,11 +1,11 @@
-from flask import Flask
+from flask import Flask, request
 from dummy_data import dummy_data
-from marshmallow import Schema, fields, post_load
+from marshmallow import Schema, fields, post_load, ValidationError
 
 app = Flask(__name__)
 
 
-class BambooStatus:
+class BambuStatus:
     def __init__(self, amsHumidity, amsTemp, bedTemper, bedTargetTemper,
                  chamberTemper, failReason, mcPercent, gcodeState, mcPrintErrorCode,
                  mcRemainingTime, nozzleTargetTemper, nozzleTemper, printError, subtask_name):
@@ -25,7 +25,7 @@ class BambooStatus:
         self.subtask_name = subtask_name
 
 
-class BambooStatusSchema(Schema):
+class BambuStatusSchema(Schema):
     amsHumidity = fields.String(required=True)
     amsTemp = fields.String(required=True)
     bedTemper = fields.String(required=True)
@@ -43,13 +43,24 @@ class BambooStatusSchema(Schema):
 
     @post_load
     def make_bs(self, data, **kwargs):
-        return BambooStatus(**data)
+        return BambuStatus(**data)
 
 
-schema = BambooStatusSchema()
-bamboo_status = schema.load(dummy_data)
+schema = BambuStatusSchema()
+bambu_status = schema.load(dummy_data)
 
 
 @app.route('/')
-def hello_world():
-    return 'Hello, World! ' + bamboo_status.subtask_name
+def status():
+    return schema.dump(bambu_status)
+
+
+@app.route('/bambu_status', methods=["PUT"])
+def update_status():
+    global bambu_status
+    data = request.json
+    try:
+        bambu_status = schema.load(data)
+    except ValidationError:
+        return "Bad Request", 400
+    return "No content", 204
