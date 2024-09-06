@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 from dummy_data import dummy_data
 from marshmallow import Schema, fields, post_load, ValidationError
 
@@ -52,7 +52,7 @@ bambu_status = schema.load(dummy_data)
 
 @app.route('/')
 def status():
-    return schema.dump(bambu_status)
+    return render_template('index.html', bambu_status=bambu_status)
 
 
 @app.route('/bambu_status', methods=["PUT"])
