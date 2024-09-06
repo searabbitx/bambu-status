@@ -1,7 +1,7 @@
 # Bambu status
 
 ## Api key
-To specify the api key, use the `api_key` secret in docker
+To specify the api key, use the `api_key` secret in docker. If you use the `docker-compose.yml` file provided with the repo, create the `api_key.txt` file with your key.
 
 ## Status update endpoint
 
