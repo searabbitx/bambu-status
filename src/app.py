@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, make_response
 from dummy_data import dummy_data
 from marshmallow import Schema, fields, post_load, ValidationError
 from pathlib import Path
@@ -59,7 +59,9 @@ def status():
 
 @app.route('/bambu_status', methods=["GET"])
 def status_json():
-    return schema.dump(bambu_status)
+    resp = make_response(schema.dump(bambu_status))
+    resp.headers['Access-Control-Allow-Origin'] = '*'
+    return resp
 
 
 @app.route('/bambu_status', methods=["PUT"])
