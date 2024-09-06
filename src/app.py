@@ -57,6 +57,11 @@ def status():
     return render_template('index.html', bambu_status=bambu_status)
 
 
+@app.route('/bambu_status', methods=["GET"])
+def status_json():
+    return schema.dump(bambu_status)
+
+
 @app.route('/bambu_status', methods=["PUT"])
 def update_status():
     global bambu_status
