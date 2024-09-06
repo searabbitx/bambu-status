@@ -5,7 +5,7 @@ services:
       - "5000:5000" 
     volumes:
       - type: bind
-        source: src
+        source: flask
         target: /usr/src/app/
     networks:
       - net
