@@ -9,6 +9,12 @@ services:
         target: /usr/src/app/
     networks:
       - net
+    secrets:
+      - api_key
+
+secrets:
+  api_key:
+    file: api_key.txt
   
 networks:
-  net: 
+  net:

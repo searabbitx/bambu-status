@@ -1,8 +1,10 @@
 from flask import Flask, request, render_template
 from dummy_data import dummy_data
 from marshmallow import Schema, fields, post_load, ValidationError
+from pathlib import Path
 
 app = Flask(__name__)
+api_key = Path('/run/secrets/api_key').read_text().strip()
 
 
 class BambuStatus:
@@ -58,6 +60,10 @@ def status():
 @app.route('/bambu_status', methods=["PUT"])
 def update_status():
     global bambu_status
+
+    if request.headers.get('X-Api-Key') != api_key:
+        return "Unauthorized", 401
+
     data = request.json
     try:
         bambu_status = schema.load(data)
