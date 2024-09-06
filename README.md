@@ -28,6 +28,6 @@ curl -v -X PUT -H 'Content-Type: application/json' \
   "subtask_name": "Test data update..."
 }
 ' \
-  192.168.122.239:5000/bambu_status
+  127.0.0.1:5000/bambu_status
 ```
 
