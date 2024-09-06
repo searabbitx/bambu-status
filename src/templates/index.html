@@ -8,11 +8,20 @@
     <link rel="stylesheet" href="static/style.css">
   </head>
   <body>
-    <h1>Hello</h1>
-    <p>Subtask name: {{ bambu_status.subtask_name }}</p>
-    <p>Gcode State: {{ bambu_status.gcodeState }}</p>
-    <p>Ams Temp: {{ bambu_status.amsTemp }}</p>
-    <p>etc...</p>
+    <h1>Bambu status</h1>
+    <p>subtask_name: {{ bambu_status.subtask_name }}</p>
+    <p>amsTemp: {{ bambu_status.amsTemp }}</p>
+    <p>bedTargetTemper: {{ bambu_status.bedTargetTemper }}</p>
+    <p>bedTemper: {{ bambu_status.bedTemper }}</p>
+    <p>chamberTemper: {{ bambu_status.chamberTemper }}</p>
+    <p>failReason: {{ bambu_status.failReason }}</p>
+    <p>gcodeState: {{ bambu_status.gcodeState }}</p>
+    <p>mcPercent: {{ bambu_status.mcPercent }}</p>
+    <p>mcPrintErrorCode: {{ bambu_status.mcPrintErrorCode }}</p>
+    <p>mcRemainingTime: {{ bambu_status.mcRemainingTime }}</p>
+    <p>nozzleTargetTemper: {{ bambu_status.nozzleTargetTemper }}</p>
+    <p>nozzleTemper: {{ bambu_status.nozzleTemper }}</p>
+    <p>printError: {{ bambu_status.printError }}</p>
     <script src="static/index.js"></script>
   </body>
 </html>
