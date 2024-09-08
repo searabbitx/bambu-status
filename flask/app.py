@@ -52,11 +52,6 @@ schema = BambuStatusSchema()
 bambu_status = schema.load(dummy_data)
 
 
-@app.route('/')
-def status():
-    return render_template('index.html', bambu_status=bambu_status)
-
-
 @app.route('/bambu_status', methods=["GET"])
 def status_json():
     resp = make_response(schema.dump(bambu_status))
