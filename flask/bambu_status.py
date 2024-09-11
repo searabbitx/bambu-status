@@ -1,4 +1,7 @@
-from marshmallow import Schema, fields, post_load, ValidationError
+from marshmallow import Schema, fields, post_load
+from pathlib import Path
+from dummy_data import dummy_data
+import json
 
 
 class BambuStatus:
@@ -19,6 +22,20 @@ class BambuStatus:
         self.nozzleTemper = nozzleTemper
         self.printError = printError
         self.subtask_name = subtask_name
+
+    def store(self):
+        status_dict = BambuStatusSchema().dump(self)
+        status_text = json.dumps(status_dict)
+        Path('data/status.json').write_text(status_text)
+
+    @staticmethod
+    def load():
+        try:
+            status_text = Path('data/status.json').read_text()
+        except FileNotFoundError:
+            return dummy_data
+        status_dict = json.loads(status_text)
+        return BambuStatusSchema().load(status_dict)
 
 
 class BambuStatusSchema(Schema):

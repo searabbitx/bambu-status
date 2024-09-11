@@ -21,6 +21,8 @@ WORKDIR /usr/src/app
 
 COPY flask .
 
+RUN mkdir -p data/
+
 RUN pip install --disable-pip-version-check --no-cache-dir -r requirements.txt
 
 CMD /usr/local/bin/entrypoint.sh
