@@ -15,6 +15,7 @@ ADD nginx/default /etc/nginx/sites-available/default
 WORKDIR /usr/src/frontend
 
 COPY frontend .
+RUN npm install
 RUN npm run build
 
 WORKDIR /usr/src/app

@@ -2,7 +2,7 @@ server {
     listen 80 default_server;
     listen [::]:80 default_server;
 
-    root /usr/src/frontend/build;
+    root /usr/src/frontend/dist;
 
     index index.html;
 
