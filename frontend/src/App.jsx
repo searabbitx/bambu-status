@@ -10,7 +10,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:5000/bambu_status');
+        const response = await fetch('api/bambu_status');
         const data = await response.json();
         setPrinterStatus(data);
         
